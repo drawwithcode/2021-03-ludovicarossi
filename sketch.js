@@ -5,6 +5,7 @@ let stars = [];
 let people = [];
 let mySong;
 let myData;
+let myImage;
 
 let personMinSize = 40;
 let personMaxSize = 160;
@@ -14,6 +15,7 @@ let longestCareer = 0;
 function preload() {
   mySong = loadSound("./assets/hanszimmer.mp3");
   myData = loadJSON("./assets/peopleinspace.json");
+  myImage = loadImage("./assets/galaxy.jpg");
 }
 
 function setup() {
@@ -44,7 +46,8 @@ function windowResized() {
 }
 
 function draw() {
-  background(0, 60);
+  backgroundImage(myImage);
+  background(0, 20);
   if (mySong.isPlaying() === false) {
     textAlign(CENTER);
     textSize(45);
@@ -79,6 +82,15 @@ function draw() {
     windowWidth / 2,
     windowHeight - 30
   );
+  pop();
+}
+
+function backgroundImage(img) {
+  push();
+  translate(width / 2, height / 2);
+  imageMode(CENTER);
+  let scale = Math.max(width / img.width, height / img.height);
+  image(img, 0, 0, img.width * scale, img.height * scale);
   pop();
 }
 
